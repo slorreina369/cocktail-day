@@ -1,6 +1,4 @@
 let apiKey = "ffe65789d16418b39e33722ce53e0bb8"
-let geocodeApi = `http://api.openweathermap.org/geo/1.0/direct?q=portland&appid=${apiKey}`
-
 
 // variables for location info
 let locationName = "";
@@ -16,6 +14,7 @@ let weatherInfo = [];
 
 // search will run this function first to grab the locations lat and lon
 function getLatLon(city, state, country) {
+    let geocodeApi = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=${apiKey}`
 
     fetch(geocodeApi)
     .then(function(response) {
