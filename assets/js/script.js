@@ -1,15 +1,20 @@
 let apiKey = "ffe65789d16418b39e33722ce53e0bb8"
 let geocodeApi = `http://api.openweathermap.org/geo/1.0/direct?q=portland&appid=${apiKey}`
 
+
+// variables for location info
 let locationName = "";
 let locationLat = "";
 let locationLon = "";
 
+// variables and array for all weather related info
 let currentTemp = "";
 let currentWeather = "";
 let weatherIcon = "";
 let weatherInfo = [];
 
+
+// search will run this function first to grab the locations lat and lon
 function getLatLon(city, state, country) {
 
     fetch(geocodeApi)
@@ -29,6 +34,7 @@ function getLatLon(city, state, country) {
 
         console.log(`lat: ${locationLat}, lon: ${locationLon}`)
 
+        // after getting the lat and lon this function runs a fetch request to get the actual weather
         getWeather();
     })
     .catch(function(error) {
@@ -60,12 +66,13 @@ function getWeather() {
 
         weatherInfo = [currentTemp, currentWeather, weatherIcon];
         
+        // after getting the weather info if statements decide which group of cocktails to display from
         if (currentTemp < 60) {
-            hotDrinks();
+            //hotDrinks();
         } else if (currentTemp < 80) {
-            normalDrinks();
+            //normalDrinks();
         } else {
-            coldDrinks();
+            //coldDrinks();
         }
 
     })
@@ -74,5 +81,5 @@ function getWeather() {
     })
 }
 
-
+// calling the starting function just for texting purposes. We can attach this function to the search button to get everything started.
 getLatLon();
