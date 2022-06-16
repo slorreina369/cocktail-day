@@ -2,8 +2,13 @@ let apiKey = "ffe65789d16418b39e33722ce53e0bb8"
 let geocodeApi = `http://api.openweathermap.org/geo/1.0/direct?q=portland&appid=${apiKey}`
 
 let locationName = "";
-let lon = "";
-let lat = "";
+let locationLat = "";
+let locationLon = "";
+
+let currentTemp = "";
+let currentWeather = "";
+let weatherIcon = "";
+let weatherInfo = [];
 
 function getLatLon(city, state, country) {
 
@@ -18,11 +23,11 @@ function getLatLon(city, state, country) {
     })
     .then(function(data) {
         locationName = data[0].name;
-        lat = data[0].lat;
-        lon = data[0].lon;
+        locationLat = data[0].lat;
+        locationLon = data[0].lon;
         
 
-        console.log(`lat: ${lat}, lon: ${lon}`)
+        console.log(`lat: ${locationLat}, lon: ${locationLon}`)
 
         getWeather();
     })
@@ -32,7 +37,7 @@ function getLatLon(city, state, country) {
 }
 
 function getWeather() {
-    let weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=imperial`
+    let weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationLat}&lon=${locationLon}&exclude={part}&appid=${apiKey}&units=imperial`
 
     fetch(weatherApiUrl)
     .then(function(response) {
@@ -44,10 +49,25 @@ function getWeather() {
         return response.json();
     })
     .then(function(data) {
+        console.log(data)
         console.log(data.current.temp);
         console.log(data.current.weather[0].description)
+        console.log(data.current.weather[0].icon)
 
-        let 
+        currentTemp = data.current.temp;
+        currentWeather = data.current.weather[0].description;
+        weatherIcon = data.current.weather[0].icon;
+
+        weatherInfo = [currentTemp, currentWeather, weatherIcon];
+        
+        if (currentTemp < 60) {
+            hotDrinks();
+        } else if (currentTemp < 80) {
+            normalDrinks();
+        } else {
+            coldDrinks();
+        }
+
     })
     .catch(function(error) {
         console.log(error);
