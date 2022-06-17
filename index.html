@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktail of the Day</title>
-</head>
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <link href="">
+    <link rel="stylesheet" href="./dist/output.css">
 
+    <title>Taily</title>
+</head>
 <body>
-    <div class="">
-        <form id="search-form">
-            <label for="ingred-name" class="">Search by ingredient(s):</label>
-            <input name="ingred-name" id="ingred-name" type="text" autofocus="true" />
-            <button type="submit" class="btn">Search</button>
-        </form>
-    </div>
-    <div id="results-area">
-        <ol class="cocktail-list">
-        </ol>
-    </div>
+    <header class="title-card">
+        <h1 class="text-center">Cocktaily Daily</h1>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="search-here mx-8">
+                <h3 class="flex justify-center">Where are we mixing things up?</h3>
+                <input id="search-city" placeholder="Eg.: City,State" type="text" autofocus="true" class="form-input flex justify-center"/>
+                <button type="search" class="search-btn flex justify-around rounded">Search</button>
+            </div>
+        </section>
+    </main>
     <script src="./assets/js/script.js"></script>
 </body>
-
 </html>
