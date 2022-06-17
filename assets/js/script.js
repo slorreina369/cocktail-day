@@ -5,8 +5,11 @@ var searchButtonEl = document.querySelector(".search-btn")
 // variables for location info
 let apiKey = "ffe65789d16418b39e33722ce53e0bb8"
 let locationName = "";
+let locationState = "";
+let locationCountry = "";
 let locationLat = "";
 let locationLon = "";
+
 
 // variables and array for all weather related info
 let currentTemp = "";
@@ -21,9 +24,9 @@ let weatherInfo = [];
 // handle submit event
 function formSubmitHandler(event) {
     event.preventDefault();
+    window.location = "./Recommendation.html"
     var searchInputEl = document.querySelector("#search-city")
     var locateArray = searchInputEl.value.split(/[ ,]+/);
-    console.log("array: ", locateArray)
     if (locateArray) {
         getLatLon(locateArray[0], locateArray[1], "")        
         // clear old content
@@ -48,6 +51,8 @@ function getLatLon(city, state, country) {
         })
         .then(function (data) {
             locationName = data[0].name;
+            locationState = data[0].state;
+            locationCountry = data[0].country;
             locationLat = data[0].lat;
             locationLon = data[0].lon;
 
@@ -61,7 +66,6 @@ function getLatLon(city, state, country) {
 
 function getWeather() {
     let weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationLat}&lon=${locationLon}&exclude={part}&appid=${apiKey}&units=imperial`
-
     fetch(weatherApiUrl)
         .then(function (response) {
             if (!response.ok) {
