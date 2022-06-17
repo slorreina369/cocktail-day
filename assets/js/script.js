@@ -24,7 +24,7 @@ let weatherInfo = [];
 // handle submit event
 function formSubmitHandler(event) {
     event.preventDefault();
-    window.location = "./Recommendation.html"
+    window.location = "./recommendation.html"
     var searchInputEl = document.querySelector("#search-city")
     var locateArray = searchInputEl.value.split(/[ ,]+/);
     if (locateArray) {
