@@ -11,7 +11,7 @@ let locationLat = "";
 let locationLon = "";
 
 
-// variables and array for all weather related info
+//variables and array for all weather related info
 let currentTemp = "";
 let currentWeather = "";
 let weatherIcon = "";
@@ -24,9 +24,10 @@ let weatherInfo = [];
 // handle submit event
 function formSubmitHandler(event) {
     event.preventDefault();
-    window.location = "./recommendation.html"
     var searchInputEl = document.querySelector("#search-city")
     var locateArray = searchInputEl.value.split(/[ ,]+/);
+
+    // relocated window.location to line 93 because of a 'failed to fetch' error
     if (locateArray) {
         getLatLon(locateArray[0], locateArray[1], "")        
         // clear old content
@@ -34,6 +35,7 @@ function formSubmitHandler(event) {
     } else {
         alert("Please enter an ingredient.")
     }
+    
 };
 
 // search will run this function first to grab the locations lat and lon
@@ -86,6 +88,12 @@ function getWeather() {
 
             weatherInfo = [currentTemp, currentWeather, weatherIcon];
 
+            localStorage.setItem("weather", JSON.stringify(weatherInfo))
+
+            //relocated this window location inside this function to prevent 'failed to fetch' error
+            // might have to move it inside the if statements after cocktail functions are ready
+            window.location = "./recommendation.html"
+
             // after getting the weather info if statements decide which group of cocktails to display from
             if (currentTemp < 60) {
                 //hotDrinks();
@@ -101,7 +109,7 @@ function getWeather() {
         })
 }
 
-searchButtonEl.addEventListener("click", formSubmitHandler)
+
 
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -157,3 +165,4 @@ var displayCocktailData = function (ingredName, data) {
     }
 };
 
+searchButtonEl.addEventListener("click", formSubmitHandler)
