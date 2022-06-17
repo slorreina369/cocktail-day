@@ -15,26 +15,26 @@ const temp = 89
 //function to request list of drinks with the word hot in its preparded instructions
 function hot() {
 
-    if(temp>80){
-        var getCocktailData = function (ingredName) {
-            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
-            fetch(apiUrl, {
-                method: "GET",
-                headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
-                contentType: 'application/json'
+    
+    var getCocktailData = function (ingredName) {
+        var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
+        fetch(apiUrl, {
+            method: "GET",
+            headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
+            contentType: 'application/json'
+        })
+            .then(function(response){
+                if(response.ok) {
+                    response.json().then(function(data){
+                        console.log(data);
+                        findWord()
+                    })
+                };
             })
-                .then(function(response){
-                    if(response.ok) {
-                        response.json().then(function(data){
-                            console.log(data);
-                            findWord()
-                        })
-                    };
-                })
-        };
+    };
         
-        getCocktailData()
-    }
+    getCocktailData()
+    
 
 };
 
