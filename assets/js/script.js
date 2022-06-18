@@ -1,5 +1,5 @@
 
-// global variables for search
+/*// global variables for search
 var searchButtonEl = document.querySelector(".search-btn")
 
 // variables for location info
@@ -163,7 +163,7 @@ var displayCocktailData = function (ingredName, data) {
         cocktailEl.appendChild(instructEl)
         cocktailListEl.appendChild(cocktailEl)
     }
-};
+};*/
 
 
 
@@ -179,87 +179,48 @@ var displayCocktailData = function (ingredName, data) {
 
 
 
-const temp = 52
+const temp = 62
 
-//function to request list of drinks with the word hot in its preparded instructions
-function hot() {
+//function to request list of drinks with the magicWord() in its ingredients
+function drinkFinder() {
 
-   // if(temp>80){
-        var getCocktailData = function (ingredName) {
-            var ingredName= magicWord()
-            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
-            fetch(apiUrl, {
-                method: "GET",
-                headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
-                contentType: 'application/json'
+   
+    var getCocktailData = function (ingredName) {
+        var ingredName= magicWord()
+        var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
+        fetch(apiUrl, {
+            method: "GET",
+            headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
+            contentType: 'application/json'
+        })
+            .then(function(response){
+                if(response.ok) {
+                    response.json().then(function(data){
+                        console.log(data); 
+                        var index = data[Math.floor(Math.random()*data.length)];
+                        console.log(index.name);
+                        document.getElementById("cocktail-name").textContent= index.name.toUpperCase()
+                            
+                                                 
+                    })
+                };
             })
-                .then(function(response){
-                    if(response.ok) {
-                        response.json().then(function(data){
-                            console.log(data);                       
-                        })
-                    };
-                })
-        };
+    };
         
-        getCocktailData()
-   // }
+    getCocktailData()
 
 };
 
-hot()
-
-//function to request a list of normal drinks 
-function mid() {
-
-    if(temp<80 && temp>60){
-        var getCocktailData = function (ingredName) {
-            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
-            fetch(apiUrl, {
-                method: "GET",
-                headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
-                contentType: 'application/json'
-            });
-        };
-
-        getCocktailData()
-    }
-};
-
-//function to request list of drinks with the word chilled or very cold in its preparded instructions
-function cold() {
-
-    if(temp<60){
-        var getCocktailData = function (ingredName) {
-            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
-            fetch(apiUrl, {
-                method: "GET",
-                headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
-                contentType: 'application/json'
-            });
-        };
-
-        getCocktailData()
-    }
-};
-
-//function to search the json data from the api for a specific word
-function findWord() {
-    for( i=0; i<data.length; i++){
-        var searchFor = magicWord();
-        console.log(data.instructions.filter((item) => {
-        return item.toLowerCase().split(" ").indexOf(searchFor.toLowerCase()) != -1
-    }));};
-};
+drinkFinder()
 
 //function to change the word that we search the json data with determined by temp
 function magicWord(){
     if(temp>80){
-        return "very cold"
+        return "ice"
     }
 
     if(temp<=80 && temp>=60){
-        return "room temparature"
+        return "garnish"
     }
 
     if(temp<60){
@@ -269,5 +230,9 @@ function magicWord(){
 };
 console.log(magicWord());
 
-searchButtonEl.addEventListener("click", formSubmitHandler)
+function appendCocktailName(){
+    document.getElementById("cocktail-name").textContent= index.name
+}
+
+//searchButtonEl.addEventListener("click", formSubmitHandler)
 
