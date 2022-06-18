@@ -136,7 +136,7 @@ var getCocktailData = function () {
 ///////////////////////////////////////////////////////////////////////////
 
 
-//const currentTemp = 89
+//const currentTemp = 70
 
 //function to request list of drinks with the magicWord() in its ingredients
 async function drinkFinder() {
@@ -157,6 +157,7 @@ async function drinkFinder() {
 
     };
 
+    //function to get one random drink from the superArray and append the cocktail name
     function getIndex(superArray) {
         var randoArray = superArray[Math.floor(Math.random() * superArray.length)];
         console.log(superArray);
@@ -180,12 +181,12 @@ function magicWord() {
     }
 
     if (currentTemp <= 80 && currentTemp >= 60) {
-        midWeatherSearch = ["garnish"]
+        midWeatherSearch = ["garnish", "glass", "shake", "blend"]
         return midWeatherSearch
     }
 
     if (currentTemp < 60) {
-        coldWeatherSearch = [" hot", "coffee"]
+        coldWeatherSearch = [" hot", "coffee", "cinnamon"]
         return coldWeatherSearch
     }
 };
