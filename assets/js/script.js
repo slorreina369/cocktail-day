@@ -129,6 +129,6 @@ var getCocktailData = function () {
             }
         })
 };
-    
 
 searchButtonEl.addEventListener("click", formSubmitHandler)
+
