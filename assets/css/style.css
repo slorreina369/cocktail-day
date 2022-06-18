@@ -22,9 +22,9 @@ header h1{
     font-size: 5vw;
     margin: 2vw;
 }
-
 .hero{
     margin-top: 15vw;
+    background-image: url("../images/cocktail\ bg-img.jpg");
 }
 #search-city{
     border: 3px solid black;
@@ -36,15 +36,32 @@ header h1{
     background-color: var(--third-color);
     margin-top: 15px;
 }
-
-@media screen and (max-width: 980px){}
-@media screen  and (max-width: 768px){}
+.weather-display, .recipe-display, .ingredients-display, .directions-display{
+    background-color: var(--third-color);
+    width: 50%;
+    text-align: center;
+    margin: 5vw 20vw 5vw 25vw
+}
+@media screen and (max-width: 980px){
+    .weather-display{
+        width: 100%;
+        margin: 5vw auto 10vw auto;
+    }
+    .recipe-display, .ingredients-display, .directions-display{
+        width: 90%;
+        margin: 5vw auto 5vw auto;
+    }
+}
+@media screen  and (max-width: 768px){
+    
+}
 @media screen and (max-width:575px){
     header h1{
         font-size: 10vw;
     }
     .hero{
-        margin-top: 50vw;
+        margin-top: 23vw;
     }
+   
 
 }
