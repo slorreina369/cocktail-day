@@ -167,11 +167,15 @@ var displayCocktailData = function (ingredName, data) {
 
 
 
-//1.use magicWord() to determine if we are trying to find a drink that is served hot or cold
+///////////////////////////////////////////////////////////////////////////
 
-//2.use findWord() to find the word in the data array and save the index number
+//How to enhance drinkFinder() Psuedo Code Special
 
-//3.use _______() to randomize the saved index numbers and choose one to display.
+//1. Create an array of search words for each branch of magicWord()
+
+//2. have drinkFinder() run through the appropriate array from magicWord() and make an api call for each index of that array.
+
+//3. concatenate all generated arrays from drinkFinder() and select a random index of the new super array
 
 
 
@@ -179,7 +183,7 @@ var displayCocktailData = function (ingredName, data) {
 
 
 
-const temp = 62
+const temp = 89
 
 //function to request list of drinks with the magicWord() in its ingredients
 function drinkFinder() {
@@ -187,16 +191,19 @@ function drinkFinder() {
    
     var getCocktailData = function (ingredName) {
         var ingredName= magicWord()
-        var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
-        fetch(apiUrl, {
-            method: "GET",
-            headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
-            contentType: 'application/json'
-        })
-            .then(function(response){
-                if(response.ok) {
-                    response.json().then(function(data){
-                        console.log(data); 
+        for(i=0; i<ingredName.length; i++){
+            console.log(ingredName[i])
+            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName[i]}`
+            fetch(apiUrl, {
+                method: "GET",
+                headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
+                contentType: 'application/json'
+            })
+                .then(function(response){
+                    if(response.ok) {
+                        response.json().then(function(data){
+                        console.log(data);
+                        
                         var index = data[Math.floor(Math.random()*data.length)];
                         console.log(index.name);
                         document.getElementById("cocktail-name").textContent= index.name.toUpperCase()
@@ -205,6 +212,7 @@ function drinkFinder() {
                     })
                 };
             })
+        };
     };
         
     getCocktailData()
@@ -216,17 +224,19 @@ drinkFinder()
 //function to change the word that we search the json data with determined by temp
 function magicWord(){
     if(temp>80){
-        return "ice"
+        hotWeatherSearch=["ice","chilled","cold"]
+        return hotWeatherSearch
     }
 
     if(temp<=80 && temp>=60){
-        return "garnish"
+        midWeatherSearch=["garnish"]
+        return midWeatherSearch
     }
 
     if(temp<60){
-        return "hot"
+        coldWeatherSearch=[" hot", "coffee"]
+        return coldWeatherSearch
     }
-    console.log(magicWord());
 };
 console.log(magicWord());
 
