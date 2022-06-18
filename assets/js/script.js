@@ -67,7 +67,7 @@ var displayCocktailData = function (ingredName, data) {
     }
 };
 
-searchFormEl.addEventListener("submit", formSubmitHandler)
+//searchFormEl.addEventListener("submit", formSubmitHandler)
 
 let apiKey = "ffe65789d16418b39e33722ce53e0bb8"
 
@@ -166,13 +166,14 @@ getLatLon();
 
 
 
-const temp = 89
+const temp = 52
 
 //function to request list of drinks with the word hot in its preparded instructions
 function hot() {
 
-    if(temp>80){
+   // if(temp>80){
         var getCocktailData = function (ingredName) {
+            var ingredName= magicWord()
             var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
             fetch(apiUrl, {
                 method: "GET",
@@ -182,17 +183,18 @@ function hot() {
                 .then(function(response){
                     if(response.ok) {
                         response.json().then(function(data){
-                            console.log(data);
-                            findWord()
+                            console.log(data);                       
                         })
                     };
                 })
         };
         
         getCocktailData()
-    }
+   // }
 
 };
+
+hot()
 
 //function to request a list of normal drinks 
 function mid() {
@@ -240,11 +242,11 @@ function findWord() {
 //function to change the word that we search the json data with determined by temp
 function magicWord(){
     if(temp>80){
-        return "cold"
+        return "very cold"
     }
 
     if(temp<=80 && temp>=60){
-        return ""
+        return "room temparature"
     }
 
     if(temp<60){
