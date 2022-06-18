@@ -21,22 +21,22 @@ function loadWeather() {
 
 function getCocktailImage() {
     let loadedCocktail = JSON.parse(localStorage.getItem("cocktail"))
-    let apiUrl = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=${loadedCocktail}%20cocktail%20recipe&pageNumber=1&pageSize=10&autoCorrect=true&safeSearch=true`
+    let apiUrl = `https://bing-image-search1.p.rapidapi.com/images/search?q=cocktail%20%2B%20recipe%20%2B%20%22${loadedCocktail}&count=1&mkt=en-US`
 
     fetch(apiUrl, {
         method: "GET",
         headers: {
             'X-RapidAPI-Key': '7df2415608mshf6be38a9814c3b3p14bd14jsncc475252c4dd',
-            'X-RapidAPI-Host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
+            'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com'
         },
         contentType: 'application/json'
     })
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    console.log(data);
+                    console.log(data.value[0].contentUrl);
                     let imageReplace = document.getElementById("cocktail-image");
-                    imageReplace.src = data.value[0].url;
+                    imageReplace.src = data.value[0].contentUrl;
             })
         }
     })

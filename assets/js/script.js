@@ -113,7 +113,7 @@ function getWeather() {
 
 // pass search criteria to API
 var getCocktailData = function () {
-    var ingredName = "whiskey"
+    var ingredName = "ice"
     var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
     fetch(apiUrl, {
         method: "GET",
