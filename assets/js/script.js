@@ -1,5 +1,5 @@
 
-/*// global variables for search
+// global variables for search
 var searchButtonEl = document.querySelector(".search-btn")
 
 // variables for location info
@@ -163,86 +163,71 @@ var displayCocktailData = function (ingredName, data) {
         cocktailEl.appendChild(instructEl)
         cocktailListEl.appendChild(cocktailEl)
     }
-};*/
+};
 
 
 
 ///////////////////////////////////////////////////////////////////////////
 
-//How to enhance drinkFinder() Psuedo Code Special
 
-//1. Create an array of search words for each branch of magicWord()
-
-//2. have drinkFinder() run through the appropriate array from magicWord() and make an api call for each index of that array.
-
-//3. concatenate all generated arrays from drinkFinder() and select a random index of the new super array
-
-
-
-
-
-
-
-const temp = 89
+//const currentTemp = 89
 
 //function to request list of drinks with the magicWord() in its ingredients
-function drinkFinder() {
+async function drinkFinder() {
 
-   
-    var getCocktailData = function (ingredName) {
-        var ingredName= magicWord()
-        for(i=0; i<ingredName.length; i++){
-            console.log(ingredName[i])
-            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName[i]}`
-            fetch(apiUrl, {
+
+    var getCocktailData = async function (ingredName) {
+        var ingredName = magicWord()
+
+        return Promise.all(ingredName.map(async (name) => {
+            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${name}`
+            const result = await fetch(apiUrl, {
                 method: "GET",
                 headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
                 contentType: 'application/json'
-            })
-                .then(function(response){
-                    if(response.ok) {
-                        response.json().then(function(data){
-                        console.log(data);
-                        
-                        var index = data[Math.floor(Math.random()*data.length)];
-                        console.log(index.name);
-                        document.getElementById("cocktail-name").textContent= index.name.toUpperCase()
-                            
-                                                 
-                    })
-                };
-            })
-        };
+            }).then(response => response.json());
+            return result;
+        }))
+
     };
-        
-    getCocktailData()
+
+    function getIndex(superArray) {
+        var randoArray = superArray[Math.floor(Math.random() * superArray.length)];
+        console.log(superArray);
+        console.log(randoArray)
+        var index = randoArray[Math.floor(Math.random() * randoArray.length)]
+        console.log(index)
+        document.getElementById("cocktail-name").textContent = index.name.toUpperCase();
+    }
+    const cocktails = await getCocktailData();
+    getIndex(cocktails);
 
 };
 
 drinkFinder()
 
 //function to change the word that we search the json data with determined by temp
-function magicWord(){
-    if(temp>80){
-        hotWeatherSearch=["ice","chilled","cold"]
+function magicWord() {
+    if (currentTemp > 80) {
+        hotWeatherSearch = ["ice", "chilled", "cold"]
         return hotWeatherSearch
     }
 
-    if(temp<=80 && temp>=60){
-        midWeatherSearch=["garnish"]
+    if (currentTemp <= 80 && currentTemp >= 60) {
+        midWeatherSearch = ["garnish"]
         return midWeatherSearch
     }
 
-    if(temp<60){
-        coldWeatherSearch=[" hot", "coffee"]
+    if (currentTemp < 60) {
+        coldWeatherSearch = [" hot", "coffee"]
         return coldWeatherSearch
     }
 };
 console.log(magicWord());
 
-function appendCocktailName(){
-    document.getElementById("cocktail-name").textContent= index.name
+function appendCocktailName() {
+    document.getElementById("cocktail-name").textContent = index.name
 }
 
-//searchButtonEl.addEventListener("click", formSubmitHandler)
+searchButtonEl.addEventListener("click", formSubmitHandler)
 
