@@ -90,11 +90,7 @@ function getWeather() {
 
             localStorage.setItem("weather", JSON.stringify(weatherInfo))
 
-            //relocated this window location inside this function to prevent 'failed to fetch' error
-            // might have to move it inside the if statements after cocktail functions are ready
-            window.location = "./recommendation.html"
-
-            // after getting the weather info if statements decide which group of cocktails to display from
+                        // after getting the weather info if statements decide which group of cocktails to display from
             if (currentTemp < 60) {
                 //hotDrinks();
             } else if (currentTemp < 80) {
@@ -102,14 +98,12 @@ function getWeather() {
             } else {
                 //coldDrinks();
             }
-
+            getCocktailData();
         })
         .catch(function (error) {
             console.log(error);
         })
 }
-
-
 
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -118,7 +112,8 @@ function getWeather() {
 ////////////////////////////////////////
 
 // pass search criteria to API
-var getCocktailData = function (ingredName) {
+var getCocktailData = function () {
+    var ingredName = "ice"
     var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
     fetch(apiUrl, {
         method: "GET",
@@ -128,41 +123,12 @@ var getCocktailData = function (ingredName) {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    displayCocktailData(ingredName, data)
+                    localStorage.setItem("cocktail", JSON.stringify(data[0].name))
+                    window.location = "./recommendation.html"
                 })
             }
         })
 };
-
-// display the data (passed from getCocktailData)
-var displayCocktailData = function (ingredName, data) {
-    console.log(data)
-
-    var ingredNameEl = document.createElement("h3")
-    ingredNameEl.textContent = `Results for: ${ingredName}`
-    resultsArea.appendChild(ingredNameEl)
-
-    var cocktailListEl = document.createElement("ol")
-    cocktailListEl.classList = "cocktail-list"
-    resultsArea.appendChild(cocktailListEl)
-
-    for (var i = 0; i < data.length; i++) {
-        var cocktailEl = document.createElement("li")
-        cocktailEl.classList = "cocktail-name"
-        cocktailEl.textContent = data[i].name
-
-        var ingredOutputEl = document.createElement("p")
-        ingredOutputEl.classList = "ingredients"
-        ingredOutputEl.textContent = data[i].ingredients
-
-        var instructEl = document.createElement("p")
-        instructEl.classList = "instructions"
-        instructEl.textContent = data[i].instructions
-
-        cocktailEl.appendChild(ingredOutputEl)
-        cocktailEl.appendChild(instructEl)
-        cocktailListEl.appendChild(cocktailEl)
-    }
-};
+    
 
 searchButtonEl.addEventListener("click", formSubmitHandler)
