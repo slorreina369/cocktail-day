@@ -42,5 +42,68 @@ function getCocktailImage() {
     })
 };
 
+///////////////////////////////////////////////////////////////////////////
+
+
+//const currentTemp = 70
+
+//function to request list of drinks with the magicWord() in its ingredients
+async function drinkFinder() {
+
+
+    var getCocktailData = async function (ingredName) {
+        var ingredName = magicWord()
+
+        return Promise.all(ingredName.map(async (name) => {
+            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${name}`
+            const result = await fetch(apiUrl, {
+                method: "GET",
+                headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
+                contentType: 'application/json'
+            }).then(response => response.json());
+            return result;
+        }))
+
+    };
+
+    //function to get one random drink from the superArray and append the cocktail name
+    function getIndex(superArray) {
+        var randoArray = superArray[Math.floor(Math.random() * superArray.length)];
+        console.log(superArray);
+        console.log(randoArray)
+        var index = randoArray[Math.floor(Math.random() * randoArray.length)]
+        console.log(index)
+        document.getElementById("cocktail-name").textContent = index.name.toUpperCase();
+    }
+    const cocktails = await getCocktailData();
+    getIndex(cocktails);
+
+};
+
+drinkFinder()
+
+//function to change the word that we search the json data with determined by temp
+function magicWord() {
+    if (loadedTemp > 80) {
+        hotWeatherSearch = ["ice", "chilled", "cold"]
+        return hotWeatherSearch
+    }
+
+    if (loadedTemp <= 80 && loadedTemp >= 60) {
+        midWeatherSearch = ["garnish", "glass", "shake", "blend"]
+        return midWeatherSearch
+    }
+
+    if (loadedTemp < 60) {
+        coldWeatherSearch = [" hot", "coffee", "cinnamon"]
+        return coldWeatherSearch
+    }
+};
+console.log(magicWord());
+
+function appendCocktailName() {
+    document.getElementById("cocktail-name").textContent = index.name
+}
+
 loadWeather();
 getCocktailImage();
