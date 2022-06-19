@@ -29,13 +29,13 @@ function formSubmitHandler(event) {
 
     // relocated window.location to line 93 because of a 'failed to fetch' error
     if (locateArray) {
-        getLatLon(locateArray[0], locateArray[1], "")        
+        getLatLon(locateArray[0], locateArray[1], "")
         // clear old content
         searchInputEl.value = "";
     } else {
         alert("Please enter an ingredient.")
     }
-    
+
 };
 
 // search will run this function first to grab the locations lat and lon
@@ -90,7 +90,7 @@ function getWeather() {
 
             localStorage.setItem("weather", JSON.stringify(weatherInfo))
 
-                        // after getting the weather info if statements decide which group of cocktails to display from
+            // after getting the weather info if statements decide which group of cocktails to display from
             if (currentTemp < 60) {
                 //hotDrinks();
             } else if (currentTemp < 80) {
@@ -98,37 +98,32 @@ function getWeather() {
             } else {
                 //coldDrinks();
             }
-            getCocktailData();
+            window.location = "./recommendation.html"
         })
         .catch(function (error) {
             console.log(error);
         })
 }
 
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
 // pass search criteria to API
-var getCocktailData = function () {
-    var ingredName = "ice"
-    var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
-    fetch(apiUrl, {
-        method: "GET",
-        headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
-        contentType: 'application/json'
-    })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    localStorage.setItem("cocktail", JSON.stringify(data[0].name))
-                    window.location = "./recommendation.html"
-                })
-            }
-        })
-};
+// var getCocktailData = function () {
+//     var ingredName = "ice"
+//     var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
+//     fetch(apiUrl, {
+//         method: "GET",
+//         headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
+//         contentType: 'application/json'
+//     })
+//         .then(function (response) {
+//             if (response.ok) {
+//                 response.json().then(function (data) {
+//                     localStorage.setItem("cocktail", JSON.stringify(data[0].name))
+//                     window.location = "./recommendation.html"
+//                 })
+//             }
+//         })
+// };
+
+
 
 searchButtonEl.addEventListener("click", formSubmitHandler)
-

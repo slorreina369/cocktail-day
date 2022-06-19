@@ -19,8 +19,8 @@ function loadWeather() {
 
 
 
-function getCocktailImage() {
-    let loadedCocktail = JSON.parse(localStorage.getItem("cocktail"))
+function getCocktailImage(name) {
+    let loadedCocktail = name
     let apiUrl = `https://bing-image-search1.p.rapidapi.com/images/search?q=cocktail%20%2B%20recipe%20%2B%20%22${loadedCocktail}&count=1&mkt=en-US`
 
     fetch(apiUrl, {
@@ -50,7 +50,6 @@ function getCocktailImage() {
 //function to request list of drinks with the magicWord() in its ingredients
 async function drinkFinder() {
 
-
     var getCocktailData = async function (ingredName) {
         var ingredName = magicWord()
 
@@ -74,9 +73,13 @@ async function drinkFinder() {
         var index = randoArray[Math.floor(Math.random() * randoArray.length)]
         console.log(index)
         document.getElementById("cocktail-name").textContent = index.name.toUpperCase();
+        cocktailNameEl = index.name.toUpperCase();
+        getCocktailImage(cocktailNameEl);
     }
     const cocktails = await getCocktailData();
     getIndex(cocktails);
+
+
 
 };
 
