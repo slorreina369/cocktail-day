@@ -72,7 +72,7 @@ async function drinkFinder() {
         console.log(randoArray)
         var index = randoArray[Math.floor(Math.random() * randoArray.length)]
         console.log(index)
-        var cocktailNameEl = document.getElementById("cocktail-name").textContent
+        document.getElementById("cocktail-name").textContent = index.name.toUpperCase();
         cocktailNameEl = index.name.toUpperCase();
         getCocktailImage(cocktailNameEl);
     }
