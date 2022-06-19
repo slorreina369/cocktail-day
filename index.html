@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
 
     <title>Taily</title>
 </head>
+
 <body>
     <header class="title-card">
         <h1 class="text-center">Cocktaily Daily</h1>
@@ -16,11 +18,49 @@
         <section class="hero">
             <form class="search-here mx-8">
                 <h3 class="flex justify-center">Where are we mixing things up?</h3>
-                <input id="search-city" placeholder="Eg.: City,State" type="text" autofocus="true" class="form-input flex justify-center"/>
+                <input id="search-city" placeholder="Eg.: City,State" type="text" autofocus="true"
+                    class="form-input flex justify-center" />
                 <button type="search" class="search-btn flex justify-around rounded">Search</button>
+                <button type="search" class="option-btn flex justify-around rounded">Options</button>
             </form>
         </section>
+        <div id="option-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Liquor Preference?</h2>
+                <form class="options-form">
+                    <ul class="options-list">
+                        <li>
+                            <input type="checkbox" name="options" id="checkbox" value="gin"/>
+                            <label for="checkbox">Gin</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="options" id="checkbox" value="rum" />
+                            <label for="checkbox">Rum</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="options" id="checkbox" value="tequila" />
+                            <label for="checkbox">Tequila</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="options" id="checkbox" value="mezcal" />
+                            <label for="checkbox">Mezcal</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="options" id="checkbox" value="whiskey whisky" />
+                            <label for="checkbox">Whisk(e)y</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="options" id="checkbox" value="vodka" />
+                            <label for="checkbox">Vodka</label>
+                        </li>
+                    </ul>
+                </form>
+                <button type="button" class="confirm-option flex justify-around rounded">Save</button>
+            </div>
+        </div>
     </main>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

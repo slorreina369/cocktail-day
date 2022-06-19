@@ -36,6 +36,11 @@ header h1{
     background-color: var(--third-color);
     margin-top: 15px;
 }
+.option-btn{
+    width: 100%;
+    background-color: var(--third-color);
+    margin-top: 15px;
+}
 .weather-display, .recipe-display, .ingredients-display, .directions-display{
     background-color: var(--third-color);
     width: 50%;

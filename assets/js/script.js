@@ -1,6 +1,7 @@
 
 // global variables for search
 var searchButtonEl = document.querySelector(".search-btn")
+var optionButtonEl = document.querySelector(".option-btn")
 
 // variables for location info
 let apiKey = "ffe65789d16418b39e33722ce53e0bb8"
@@ -35,7 +36,33 @@ function formSubmitHandler(event) {
     } else {
         alert("Please enter an ingredient.")
     }
+};
 
+function optionHandler(event) {
+    event.preventDefault();
+    var modal = document.querySelector("#option-modal");
+    modal.style.display = "block";
+
+    var span = document.querySelector(".close")
+    span.onclick = function () {
+        modal.style.display = "none"
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+// WORK IN PROGRESS FOR LIQUOR CHOICE OPTIONS
+    var modalButtonEl = document.querySelector(".confirm-option")
+    modalButtonEl.onclick = function () {
+        var OptionListEl = document.querySelector(".options-list")
+        var choiceArray = []
+
+        modal.style.display = "none"
+
+    }
 };
 
 // search will run this function first to grab the locations lat and lon
@@ -105,25 +132,7 @@ function getWeather() {
         })
 }
 
-// pass search criteria to API
-// var getCocktailData = function () {
-//     var ingredName = "ice"
-//     var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${ingredName}`
-//     fetch(apiUrl, {
-//         method: "GET",
-//         headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
-//         contentType: 'application/json'
-//     })
-//         .then(function (response) {
-//             if (response.ok) {
-//                 response.json().then(function (data) {
-//                     localStorage.setItem("cocktail", JSON.stringify(data[0].name))
-//                     window.location = "./recommendation.html"
-//                 })
-//             }
-//         })
-// };
-
 
 
 searchButtonEl.addEventListener("click", formSubmitHandler)
+optionButtonEl.addEventListener("click", optionHandler)
