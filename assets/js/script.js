@@ -60,6 +60,15 @@ function optionHandler(event) {
         var OptionListEl = document.querySelector(".options-list")
         var choiceArray = []
 
+        for (var i = 0; i < OptionListEl.children.length; i++) {
+            if (OptionListEl.children[i].children[0].type == "checkbox") {
+                if (OptionListEl.children[i].children[0].checked == true) {
+                    choiceArray.push(OptionListEl.children[i].children[0].value);
+                }
+            }
+        }
+        console.log(choiceArray)
+        localStorage.setItem("choices", JSON.stringify(choiceArray))
         modal.style.display = "none"
 
     }
