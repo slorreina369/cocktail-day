@@ -2,6 +2,12 @@ let loadedTemp = "";
 let loadedConditions = "";
 let loadedWeatherIcon = "";
 
+// variables to save cocktail
+let savedCocktail = "";
+let savedIngred = "";
+let savedInstructions = "";
+let cocktailInfo = [];
+
 function loadWeather() {
     let loadedWeather = JSON.parse(localStorage.getItem("weather"))
     console.log(`temp: ${loadedWeather[0]}`)
@@ -71,7 +77,14 @@ async function drinkFinder() {
         console.log(superArray);
         console.log(randoArray)
         var index = randoArray[Math.floor(Math.random() * randoArray.length)]
-        console.log(index)
+
+        // saving cocktail info to local storage
+        savedCocktail = index.name;
+        savedIngred = index.ingredients;
+        savedInstructions = index.instructions;
+        cocktailInfo = [savedCocktail, savedIngred, savedInstructions]
+        localStorage.setItem("cocktail", JSON.stringify(cocktailInfo))
+
         document.getElementById("cocktail-name").textContent = index.name.toUpperCase();
         cocktailNameEl = index.name.toUpperCase();
         getCocktailImage(cocktailNameEl);
@@ -107,6 +120,8 @@ console.log(magicWord());
 function appendCocktailName() {
     document.getElementById("cocktail-name").textContent = index.name
 }
+
+
 
 loadWeather();
 getCocktailImage();
