@@ -76,7 +76,7 @@ function optionHandler(event) {
 
 // search will run this function first to grab the locations lat and lon
 function getLatLon(city, state, country) {
-    let geocodeApi = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=${apiKey}`
+    let geocodeApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=${apiKey}`
 
     fetch(geocodeApi)
         .then(function (response) {
