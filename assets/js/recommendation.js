@@ -73,17 +73,17 @@ async function drinkFinder() {
 function magicWord() {
     if (loadedTemp > 80) {
         hotWeatherSearch = ["ice", "chilled", "cold"]
-        return hotWeatherSearch[Math.floor(Math.random() * hotWeatherSearch.length)]
+        return hotWeatherSearch
     }
 
     if (loadedTemp <= 80 && loadedTemp >= 60) {
         midWeatherSearch = ["garnish", "glass", "shake", "blend"]
-        return midWeatherSearch[Math.floor(Math.random() * midWeatherSearch.length)]
+        return midWeatherSearch
     }
 
     if (loadedTemp < 60) {
-        coldWeatherSearch = [" hot"]
-        return coldWeatherSearch[Math.floor(Math.random() * coldWeatherSearch.length)]
+        coldWeatherSearch = [" hot", " warm"]
+        return coldWeatherSearch
     }
 };
 
