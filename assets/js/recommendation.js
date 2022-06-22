@@ -11,9 +11,6 @@ let savedCocktailURL = "";
 
 function loadWeather() {
     let loadedWeather = JSON.parse(localStorage.getItem("weather"))
-    console.log(`temp: ${loadedWeather[0]}`)
-    console.log(`conditions: ${loadedWeather[1]}`)
-    console.log(`icon code: ${loadedWeather[2]}`)
 
     loadedTemp = loadedWeather[0];
     loadedConditions = loadedWeather[1];
@@ -23,8 +20,6 @@ function loadWeather() {
     document.querySelector("#conditions").textContent = loadedConditions;
     document.querySelector("#icon").innerHTML = "<img src='http://openweathermap.org/img/wn/" + loadedWeatherIcon + "@2x.png' alt='conditions'>"
 }
-
-
 
 function getCocktailImage(name) {
     let loadedCocktail = name
@@ -41,7 +36,6 @@ function getCocktailImage(name) {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    console.log(data.value[0].contentUrl);
                     let imageReplace = document.getElementById("cocktail-image");
                     imageReplace.src = data.value[0].contentUrl;
                     savedCocktailURL = data.value[0].contentUrl;
@@ -51,16 +45,15 @@ function getCocktailImage(name) {
     })
 };
 
-///////////////////////////////////////////////////////////////////////////
-
-
-//const currentTemp = 70
 
 //function to request list of drinks with the magicWord() in its ingredients
 async function drinkFinder() {
 
     var getCocktailData = async function (ingredName) {
-        var ingredName = magicWord()
+        var choices = JSON.parse(localStorage.getItem("choices"))
+        choices = choices[Math.floor(Math.random() * choices.length)]
+        var ingredName = [magicWord(), choices]
+        console.log("ingredients: ", ingredName)
 
         return Promise.all(ingredName.map(async (name) => {
             var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${name}`
@@ -71,14 +64,11 @@ async function drinkFinder() {
             }).then(response => response.json());
             return result;
         }))
-
     };
 
     //function to get one random drink from the superArray and append the cocktail name
     function getIndex(superArray) {
         var randoArray = superArray[Math.floor(Math.random() * superArray.length)];
-        console.log(superArray);
-        console.log(randoArray)
         var index = randoArray[Math.floor(Math.random() * randoArray.length)]
 
         // saving cocktail info to local storage
@@ -94,12 +84,7 @@ async function drinkFinder() {
     }
     const cocktails = await getCocktailData();
     getIndex(cocktails);
-
-
-
 };
-
-drinkFinder()
 
 //function to change the word that we search the json data with determined by temp
 function magicWord() {
@@ -114,11 +99,10 @@ function magicWord() {
     }
 
     if (loadedTemp < 60) {
-        coldWeatherSearch = [" hot", "coffee", "cinnamon"]
+        coldWeatherSearch = [" hot", " warm"]
         return coldWeatherSearch
     }
 };
-console.log(magicWord());
 
 function appendCocktailName() {
     document.getElementById("cocktail-name").textContent = index.name
@@ -127,4 +111,4 @@ function appendCocktailName() {
 
 
 loadWeather();
-getCocktailImage();
+drinkFinder();
