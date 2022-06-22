@@ -129,6 +129,12 @@ main{
     .search-here{
         font-size: 12px;
     }
-   
-
+}
+@media screen and (min-width: 980px){
+    .hero h3{
+        color: white;
+        font-size: 50px;
+        font-weight: 900;
+        -webkit-text-stroke: 3px #000;
+    }
 }
