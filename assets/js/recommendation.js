@@ -7,6 +7,7 @@ let savedCocktail = "";
 let savedIngred = "";
 let savedInstructions = "";
 let cocktailInfo = [];
+let savedCocktailURL = "";
 
 function loadWeather() {
     let loadedWeather = JSON.parse(localStorage.getItem("weather"))
@@ -43,6 +44,8 @@ function getCocktailImage(name) {
                     console.log(data.value[0].contentUrl);
                     let imageReplace = document.getElementById("cocktail-image");
                     imageReplace.src = data.value[0].contentUrl;
+                    savedCocktailURL = data.value[0].contentUrl;
+                    localStorage.setItem("cocktailUrl", JSON.stringify(savedCocktailURL))
             })
         }
     })
