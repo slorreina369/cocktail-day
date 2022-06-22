@@ -22,9 +22,19 @@ header h1{
     font-size: 5vw;
     margin: 2vw;
 }
+main{
+    padding: 5%;
+}
 .hero{
-    margin-top: 15vw;
     background-image: url("../images/cocktail\ bg-img.jpg");
+    background-position: top;
+    background-size: cover;
+    padding-bottom: 70%;
+}
+.search-here{
+    padding-top: 32%;
+    font-weight: bold;
+    font-size: 25px;
 }
 #search-city{
     border: 3px solid black;
@@ -56,16 +66,25 @@ header h1{
         width: 90%;
         margin: 5vw auto 5vw auto;
     }
+    .search-here{
+        font-size: 20px;
+        padding-top: 36%;
+    }
 }
 @media screen  and (max-width: 768px){
-    
+    .search-here{
+        font-size: 18px;
+    }
 }
 @media screen and (max-width:575px){
     header h1{
         font-size: 10vw;
     }
     .hero{
-        margin-top: 23vw;
+        margin-top: 5vw;
+    }
+    .search-here{
+        font-size: 12px;
     }
    
 
