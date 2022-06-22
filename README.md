@@ -2,4 +2,4 @@
 
 An app to deliver fresh and fun drinks each day depending on the weather. Cheers!
 
-CHANGE!
+Developed by Lorreina Guyett, Matthew Hlavaty, Brandon Geertsen, and Hunter Olson. 
