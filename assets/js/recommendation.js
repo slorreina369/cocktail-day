@@ -51,8 +51,13 @@ async function drinkFinder() {
 
     var getCocktailData = async function (ingredName) {
         var choices = JSON.parse(localStorage.getItem("choices"))
-        choices = choices[Math.floor(Math.random() * choices.length)]
-        var ingredName = [magicWord(), choices]
+        if(!choices) {
+            var ingredName = magicWord()
+        } else {
+            choices = choices[Math.floor(Math.random() * choices.length)]
+            var ingredName = [magicWord(), choices]
+        }
+        
         console.log("ingredients: ", ingredName)
 
         return Promise.all(ingredName.map(async (name) => {
@@ -71,7 +76,7 @@ async function drinkFinder() {
         var randoArray = superArray[Math.floor(Math.random() * superArray.length)];
         var index = randoArray[Math.floor(Math.random() * randoArray.length)]
 
-        // saving cocktail info to local storage
+        //saving cocktail info to local storage
         savedCocktail = index.name;
         savedIngred = index.ingredients;
         savedInstructions = index.instructions;
