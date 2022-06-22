@@ -5,41 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/output.css">
-    <title>Taily</title>
+    <title>Daily Cocktaily</title>
 </head>
 <body>
     <header class="title-card">
-        <h1 class="text-center">Cocktaily Daily</h1>
+        <h1 class="text-center"><a href="index.html">Daily Cocktaily</a></h1>
     </header>
     <main>
         <section class="recipe-display flex justify-center flex-col p-10 rounded-md">
-            <h3 class="text-2xl font-bold p-2">Cocktail Name Title</h3>
-            <img src="./assets/images/sample-cocktail.jpg" alt="Cocktail Photo">
+            <h3 id="cocktail-name" class="text-2xl font-bold p-2">Cocktail Name Title</h3>
+            <img id="cocktail-image" src="./assets/images/sample-cocktail.jpg" alt="Cocktail Photo">
         </section>
 
         <section class="ingredients-display flex justify-center flex-col p-10 rounded-md">
             <h3 class="text-2xl font-bold">What You'll Need</h3>
-            <ul class="list-disc text-left">
-                <li>Lorem ipsum dolor</li>
-                <li>sit amet consectetur</li>
-                <li>adipisicing elit.</li>
-                <li>Inventore explicabo sed </li>
-                <li>totam officiis.</li>
+            <ul id="ingredients-list" class="list-disc text-left">
+               
             </ul>
         </section>
 
         <section class="directions-display flex justify-center flex-col p-10 rounded-md">
-            <h4 class="text-2xl font-bold">What You'll Do</h4>
-            <ol class="list-decimal text-left">
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                <li>Maxime et mollitia officia omnis quo facere quam adipisci veniam </li>
-                <li>sequi quod aperiam deleniti eveniet unde</li>
-                <li>totam illo cupiditate earum nobis nemo.</li>
-                <li>facere sit quos ipsa minima</li>
-                <li>cupiditate reprehenderit similique.</li>
-                <li>Neque perferendis voluptates fuga laborum dolor sunt error itaque.</li>
-            </ol>
+            <h4 class="text-2xl font-bold">All You Have to Do is ...</h4>
+            <p id="instructions"></p>
         </section>
     </main>
+    <script src="./assets/js/recipe.js"></script>
 </body>
 </html>
