@@ -18,7 +18,7 @@ function loadWeather() {
 
     document.querySelector("#temp").textContent = loadedTemp;
     document.querySelector("#conditions").textContent = loadedConditions;
-    document.querySelector("#icon").innerHTML = "<img src='http://openweathermap.org/img/wn/" + loadedWeatherIcon + "@2x.png' alt='conditions'>"
+    document.querySelector("#icon").innerHTML = "<img src='https://openweathermap.org/img/wn/" + loadedWeatherIcon + "@2x.png' alt='conditions'>"
 }
 
 function getCocktailImage(name) {
