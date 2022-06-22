@@ -1,0 +1,86 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --first-color: #432818;
+    --second-color: #99582a;
+    --third-color: #bb9457;
+    --fourth-color:#FFE6A7;
+    --fifth-color: #6f1d1b;
+}
+body{
+    background-color: var(--fifth-color);
+}
+header {
+    background-color: var(--first-color);
+    color: var(--fourth-color);
+    padding: 5px;
+}
+header h1{
+    font-size: 5vw;
+    margin: 2vw;
+}
+main{
+    padding: 5%;
+}
+.hero{
+    background-image: url("../images/cocktail\ bg-img.jpg");
+    background-position: top;
+    background-size: cover;
+    padding-bottom: 70%;
+}
+.search-here{
+    padding-top: 32%;
+    font-weight: bold;
+    font-size: 25px;
+}
+#search-city{
+    border: 3px solid black;
+    width: 100%;
+    padding: 5px;
+}
+.search-btn{
+    width: 100%;
+    background-color: var(--third-color);
+    margin-top: 15px;
+}
+.weather-display, .recipe-display, .ingredients-display, .directions-display{
+    background-color: var(--third-color);
+    width: 50%;
+    text-align: center;
+    margin: 5vw 20vw 5vw 25vw
+}
+@media screen and (max-width: 980px){
+    .weather-display{
+        width: 100%;
+        margin: 5vw auto 10vw auto;
+    }
+    .recipe-display, .ingredients-display, .directions-display{
+        width: 90%;
+        margin: 5vw auto 5vw auto;
+    }
+    .search-here{
+        font-size: 20px;
+        padding-top: 36%;
+    }
+}
+@media screen  and (max-width: 768px){
+    .search-here{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width:575px){
+    header h1{
+        font-size: 10vw;
+    }
+    .hero{
+        margin-top: 5vw;
+    }
+    .search-here{
+        font-size: 12px;
+    }
+   
+
+}
