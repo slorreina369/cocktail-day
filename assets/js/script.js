@@ -28,7 +28,6 @@ function formSubmitHandler(event) {
     var searchInputEl = document.querySelector("#search-city")
     var locateArray = searchInputEl.value.split(/[ ,]+/);
 
-    // relocated window.location to line 93 because of a 'failed to fetch' error
     if (locateArray) {
         getLatLon(locateArray[0], locateArray[1], "")
         // clear old content
@@ -54,7 +53,7 @@ function optionHandler(event) {
         }
     }
 
-// WORK IN PROGRESS FOR LIQUOR CHOICE OPTIONS
+// Modal for liquor options
     var modalButtonEl = document.querySelector(".confirm-option")
     modalButtonEl.onclick = function () {
         var OptionListEl = document.querySelector(".options-list")
