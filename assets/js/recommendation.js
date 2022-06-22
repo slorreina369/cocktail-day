@@ -23,7 +23,8 @@ function loadWeather() {
 
 function getCocktailImage(name) {
     let loadedCocktail = name
-    let apiUrl = `https://bing-image-search1.p.rapidapi.com/images/search?q=cocktail%20%2B%20recipe%20%2B%20%22${loadedCocktail}&count=1&mkt=en-US`
+    console.log(loadedCocktail)
+    let apiUrl = `https://bing-image-search1.p.rapidapi.com/images/search?q=cocktail%20%2B%20recipe%20%2B%20%22${loadedCocktail}&count=2&mkt=en-US`
 
     fetch(apiUrl, {
         method: "GET",
@@ -36,13 +37,17 @@ function getCocktailImage(name) {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    let imageReplace = document.getElementById("cocktail-image");
-                    imageReplace.src = data.value[0].contentUrl;
-                    savedCocktailURL = data.value[0].contentUrl;
-                    localStorage.setItem("cocktailUrl", JSON.stringify(savedCocktailURL))
-            })
-        }
-    })
+                    if (!data) {
+                        getCocktailImage(name)
+                    } else { 
+                        let imageReplace = document.getElementById("cocktail-image");
+                        imageReplace.src = data.value[0].contentUrl;
+                        savedCocktailURL = data.value[0].contentUrl;
+                        localStorage.setItem("cocktailUrl", JSON.stringify(savedCocktailURL))
+                    }
+                })
+            } else {getCocktailImage(name)}
+        })
 };
 
 
@@ -51,17 +56,22 @@ async function drinkFinder() {
 
     var getCocktailData = async function (ingredName) {
         var choices = JSON.parse(localStorage.getItem("choices"))
-        if(!choices) {
+        if (!choices) {
             var ingredName = magicWord()
         } else {
             choices = choices[Math.floor(Math.random() * choices.length)]
-            var ingredName = [magicWord(), choices]
+            var ingredName = magicWord()
         }
-        
-        console.log("ingredients: ", ingredName)
 
         return Promise.all(ingredName.map(async (name) => {
-            var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${name}`
+            if (!choices) {
+                var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${name}`
+
+            } else {
+                var apiUrl = `https://api.api-ninjas.com/v1/cocktail?ingredients=${name},%20${choices}`
+
+            }
+            console.log(apiUrl)
             const result = await fetch(apiUrl, {
                 method: "GET",
                 headers: { 'X-Api-Key': '31T9JplSy3SJ+yCq4xnfQA==VH9mNehgzi2IYKIV' },
@@ -75,6 +85,9 @@ async function drinkFinder() {
     function getIndex(superArray) {
         var randoArray = superArray[Math.floor(Math.random() * superArray.length)];
         var index = randoArray[Math.floor(Math.random() * randoArray.length)]
+        console.log("SA: ", superArray)
+        console.log("RA: ", randoArray)
+        console.log("index: ", index)
 
         //saving cocktail info to local storage
         savedCocktail = index.name;
