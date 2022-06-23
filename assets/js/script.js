@@ -4,19 +4,19 @@ var searchButtonEl = document.querySelector(".search-btn")
 var optionButtonEl = document.querySelector(".option-btn")
 
 // variables for location info
-let apiKey = "ffe65789d16418b39e33722ce53e0bb8"
-let locationName = "";
-let locationState = "";
-let locationCountry = "";
-let locationLat = "";
-let locationLon = "";
+var apiKey = "ffe65789d16418b39e33722ce53e0bb8"
+var locationName = "";
+var locationState = "";
+var locationCountry = "";
+var locationLat = "";
+var locationLon = "";
 
 
 //variables and array for all weather related info
-let currentTemp = "";
-let currentWeather = "";
-let weatherIcon = "";
-let weatherInfo = [];
+var currentTemp = "";
+var currentWeather = "";
+var weatherIcon = "";
+var weatherInfo = [];
 
 // *** potential variables for bells and whistles
 // var ingredInputEl = document.querySelector("#ingred-name")
@@ -53,7 +53,7 @@ function optionHandler(event) {
         }
     }
 
-// Modal for liquor options
+    // Modal for liquor options
     var modalButtonEl = document.querySelector(".confirm-option")
     modalButtonEl.onclick = function () {
         var OptionListEl = document.querySelector(".options-list")
@@ -75,7 +75,7 @@ function optionHandler(event) {
 
 // search will run this function first to grab the locations lat and lon
 function getLatLon(city, state, country) {
-    let geocodeApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=${apiKey}`
+    var geocodeApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=${apiKey}`
 
     fetch(geocodeApi)
         .then(function (response) {
@@ -102,7 +102,7 @@ function getLatLon(city, state, country) {
 }
 
 function getWeather() {
-    let weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationLat}&lon=${locationLon}&exclude={part}&appid=${apiKey}&units=imperial`
+    var weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationLat}&lon=${locationLon}&exclude={part}&appid=${apiKey}&units=imperial`
     fetch(weatherApiUrl)
         .then(function (response) {
             if (!response.ok) {
@@ -125,14 +125,6 @@ function getWeather() {
 
             localStorage.setItem("weather", JSON.stringify(weatherInfo))
 
-            // after getting the weather info if statements decide which group of cocktails to display from
-            if (currentTemp < 60) {
-                //hotDrinks();
-            } else if (currentTemp < 80) {
-                //normalDrinks();
-            } else {
-                //coldDrinks();
-            }
             window.location = "./pages/recommendation.html"
         })
         .catch(function (error) {
