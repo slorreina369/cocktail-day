@@ -81,7 +81,20 @@ function getLatLon(city, state, country) {
         .then(function (response) {
             if (!response.ok) {
                 console.log(response.json())
-                alert("failed to fetch weather data")
+                var alertEl = document.createElement("div")
+                alertEl.classList = "modal"
+                alertEl.style.display = "block"
+                var messageEl = document.createElement("h3")
+                messageEl.classList = "modal-content"
+                messageEl.textContent = "Failed to fetch weather for this location"
+                alertEl.appendChild(messageEl)
+                document.querySelector("main").appendChild(alertEl)
+
+                window.onclick = function (event) {
+                    if (event.target == alertEl) {
+                        alertEl.style.display = "none";
+                    }
+                }
             }
 
             return response.json();

@@ -71,6 +71,10 @@ main{
   background-color: rgba(0,0,0,0.4);
 }
 
+.alert-block {
+    display:block;
+}
+
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
