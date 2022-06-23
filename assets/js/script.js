@@ -133,7 +133,7 @@ function getWeather() {
             } else {
                 //coldDrinks();
             }
-            window.location = "./recommendation.html"
+            window.location = "./pages/recommendation.html"
         })
         .catch(function (error) {
             console.log(error);
