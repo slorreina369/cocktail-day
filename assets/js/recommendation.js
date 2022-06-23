@@ -1,16 +1,16 @@
-let loadedTemp = "";
-let loadedConditions = "";
-let loadedWeatherIcon = "";
+var loadedTemp = "";
+var loadedConditions = "";
+var loadedWeatherIcon = "";
 
 // variables to save cocktail
-let savedCocktail = "";
-let savedIngred = "";
-let savedInstructions = "";
-let cocktailInfo = [];
-let savedCocktailURL = "";
+var savedCocktail = "";
+var savedIngred = "";
+var savedInstructions = "";
+var cocktailInfo = [];
+var savedCocktailURL = "";
 
 function loadWeather() {
-    let loadedWeather = JSON.parse(localStorage.getItem("weather"))
+    var loadedWeather = JSON.parse(localStorage.getItem("weather"))
 
     loadedTemp = loadedWeather[0];
     loadedConditions = loadedWeather[1];
@@ -22,9 +22,9 @@ function loadWeather() {
 }
 
 function getCocktailImage(name) {
-    let loadedCocktail = name
+    var loadedCocktail = name
     console.log(loadedCocktail)
-    let apiUrl = `https://bing-image-search1.p.rapidapi.com/images/search?q=cocktail%20%2B%20recipe%20%2B%20%22${loadedCocktail}&count=2&mkt=en-US`
+    var apiUrl = `https://bing-image-search1.p.rapidapi.com/images/search?q=cocktail%20%2B%20recipe%20%2B%20%22${loadedCocktail}&count=2&mkt=en-US`
 
     fetch(apiUrl, {
         method: "GET",
@@ -39,14 +39,14 @@ function getCocktailImage(name) {
                 response.json().then(function (data) {
                     if (!data) {
                         getCocktailImage(name)
-                    } else { 
-                        let imageReplace = document.getElementById("cocktail-image");
+                    } else {
+                        var imageReplace = document.getElementById("cocktail-image");
                         imageReplace.src = data.value[0].contentUrl;
                         savedCocktailURL = data.value[0].contentUrl;
                         localStorage.setItem("cocktailUrl", JSON.stringify(savedCocktailURL))
                     }
                 })
-            } else {getCocktailImage(name)}
+            } else { getCocktailImage(name) }
         })
 };
 
