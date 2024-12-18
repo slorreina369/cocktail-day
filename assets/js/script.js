@@ -112,7 +112,8 @@ function getLatLon(city, state, country) {
 }
 
 function getWeather() {
-  var weatherApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationLat}&lon=${locationLon}&exclude={part}&appid=${apiKey}&units=imperial`;
+  var weatherApiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${locationLat}&lon=${locationLon}&exclude={part}&appid=${apiKey}&units=imperial`;
+
   fetch(weatherApiUrl)
     .then(function (response) {
       if (!response.ok) {
